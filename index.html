@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💕 康娜 → 科伟哥哥</title>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+SC:wght@400;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/kewei_dessert_theme.css?v=16">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'M PLUS Rounded 1c','Noto Sans SC','Zen Maru Gothic',sans-serif;background:#FFF8FC;user-select:none;display:flex;align-items:center;justify-content:center}
+:root{--pink:#FF9EC4;--pink2:#FF78A8;--lav:#E4C0F0;--sky:#B8E4F8;--rose:#FF85A8;--text:#6B4A5E;--text2:#A88898;--cream:#FFFBFD}
+
+#stage-wrap{position:relative;z-index:20;width:100%;max-width:760px;height:100vh;max-height:900px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px}
+
+/* ===== 标题区 ===== */
+.title-cluster{text-align:center;margin-bottom:8px;animation:titleDrop .9s cubic-bezier(.34,1.56,.64,1)}
+@keyframes titleDrop{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+.title-cluster .main-title{
+  font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,5vw,28px);font-weight:900;letter-spacing:3px;
+  color:#FF85A8;text-shadow:0 2px 0 #FFF,0 0 20px rgba(255,158,196,.35);
+}
+.title-cluster .jp-sub{font-size:11px;color:var(--text2);letter-spacing:6px;margin-top:4px}
+.title-cluster .heart-badge{
+  display:inline-flex;margin-top:8px;padding:5px 18px;border-radius:999px;
+  background:#FFF;color:var(--rose);font-size:11px;font-weight:700;letter-spacing:1px;
+  border:2px solid #FFE0EE;box-shadow:0 3px 12px rgba(255,158,196,.15);
+}
+
+/* ===== 进度 ===== */
+.heart-chain{display:flex;gap:5px;margin:8px 0;align-items:center}
+.h-node{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;border-radius:50%;
+  background:#FFF;border:2px solid #FFE4F0;color:#E8A8C0;transition:all .4s cubic-bezier(.34,1.56,.64,1)}
+.h-node.active{background:linear-gradient(145deg,#FFB8D8,#FF85A8);border-color:#FFF;color:#FFF;transform:scale(1.15);box-shadow:0 0 14px rgba(255,158,196,.45)}
+.h-node.done{background:#FFE8F2;border-color:#FFC8E0;color:#FF85A8}
+.h-line{width:14px;height:3px;background:#FFE4F0;border-radius:2px}
+.h-line.done{background:linear-gradient(90deg,#FFB8D8,#E4C0F0)}
+
+/* ===== 康娜立绘框 ===== */
+.char-frame{
+  position:relative;margin:6px 0;padding:10px;border-radius:28px;
+  background:linear-gradient(160deg,#FFF 0%,#FFF0F7 100%);
+  border:3px solid #FFF;box-shadow:0 12px 40px rgba(255,158,196,.2),0 0 0 4px rgba(255,228,240,.6);
+}
+.char-inner{
+  position:relative;border-radius:22px;overflow:hidden;width:270px;height:330px;
+  background:radial-gradient(ellipse at 50% 85%,#FFE8F2 0%,#FFF8FC 55%,#FFF 100%);
+  border:2px solid #FFE8F2;display:flex;align-items:flex-end;justify-content:center;
+}
+@media(max-width:500px){.char-inner{width:210px;height:260px}}
+.kanna-wrap{position:relative;display:flex;align-items:flex-end;justify-content:center;width:100%;height:100%;padding-bottom:6px;animation:kannaIdle 4s ease-in-out infinite}
+@keyframes kannaIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.glow-ring{position:absolute;border-radius:50%;pointer-events:none}
+.glow-ring.r1{width:240px;height:240px;top:50%;left:50%;transform:translate(-50%,-52%);
+  background:radial-gradient(circle,rgba(255,200,220,.3),transparent 70%);animation:ringPulse 4s infinite}
+.glow-ring.r2{width:200px;height:200px;top:50%;left:50%;transform:translate(-50%,-48%);
+  background:radial-gradient(circle,rgba(230,200,255,.2),transparent 65%)}
+@keyframes ringPulse{0%,100%{opacity:.45}50%{opacity:.85}}
+#kanna{max-height:93%;max-width:86%;object-fit:contain;object-position:center bottom;display:block;
+  filter:drop-shadow(0 6px 20px rgba(255,158,196,.25));cursor:pointer;transform:rotate(-1deg) translateX(1px);transform-origin:center bottom;transition:transform .3s}
+.kanna-wrap:hover #kanna{transform:rotate(-1deg) translateX(1px) scale(1.02) translateY(-2px)}
+.kanna-wrap.bounce{animation:kannaBounce .55s cubic-bezier(.34,1.56,.64,1)}
+.kanna-wrap.shake{animation:kannaShake .4s}
+.kanna-wrap.happy{animation:kannaHappy .7s ease}
+.kanna-wrap.love #kanna{animation:kannaLove 1.1s ease infinite}
+@keyframes kannaBounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-14px)}70%{transform:translateY(-4px)}}
+@keyframes kannaShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes kannaHappy{50%{transform:translateY(-6px) scale(1.03)}}
+@keyframes kannaLove{50%{transform:rotate(-1deg) scale(1.02)}}
+
+.expr-overlay{position:absolute;inset:0;pointer-events:none;transition:opacity .35s;z-index:4}
+.blush-overlay{opacity:0;background:radial-gradient(ellipse 28% 10% at 34% 40%,rgba(255,150,170,.28),transparent),radial-gradient(ellipse 28% 10% at 66% 40%,rgba(255,150,170,.28),transparent)}
+.blush-overlay.on{opacity:1}
+.love-overlay{opacity:0}.love-overlay.on{opacity:1}
+.love-overlay::before,.love-overlay::after{content:'♡';position:absolute;font-size:16px;color:#FF85A8;animation:loveOrbit 3s ease-in-out infinite}
+.love-overlay::before{top:18%;left:12%}.love-overlay::after{top:22%;right:10%;animation-delay:1.2s}
+@keyframes loveOrbit{50%{transform:translateY(-10px);opacity:1}}
+
+/* ===== 语音气泡 ===== */
+.voice-panel{
+  position:absolute;top:4px;right:4px;z-index:20;display:flex;align-items:center;gap:5px;
+  padding:4px 10px 4px 8px;border-radius:16px 16px 16px 4px;
+  background:#FFF;border:2px solid #FFD0E4;box-shadow:0 4px 14px rgba(255,158,196,.2);
+  opacity:0;transform:scale(.9);transition:all .3s;pointer-events:none;
+}
+.voice-panel.on{opacity:1;transform:scale(1)}
+.voice-panel .v-icon{font-size:12px}
+.voice-waves{display:flex;align-items:flex-end;gap:2px;height:14px}
+.v-wave{width:3px;background:#FF85A8;border-radius:2px;animation:waveBar .45s infinite alternate}
+.v-wave:nth-child(1){height:5px}.v-wave:nth-child(2){height:10px;animation-delay:.08s}
+.v-wave:nth-child(3){height:7px;animation-delay:.16s}.v-wave:nth-child(4){height:12px;animation-delay:.12s}
+.v-wave:nth-child(5){height:6px;animation-delay:.04s}
+@keyframes waveBar{from{height:4px;opacity:.4}to{height:12px;opacity:1}}
+.voice-text{font-size:9px;color:var(--rose);font-weight:700;max-width:100px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ===== Galgame 对话框 ===== */
+.vn-dialogue{position:relative;width:94%;max-width:520px;margin-top:12px}
+.vn-box{
+  position:relative;padding:18px 20px 16px;border-radius:24px;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FFF5FA 100%);
+  border:3px solid #FFE8F2;box-shadow:0 8px 28px rgba(255,158,196,.12),inset 0 2px 0 #FFF;
+  min-height:84px;
+}
+.vn-box::before{content:'';position:absolute;top:8px;left:12px;right:12px;bottom:8px;border-radius:18px;
+  border:1px dashed rgba(255,180,210,.35);pointer-events:none}
+.name-plate{
+  position:absolute;top:-13px;left:18px;display:flex;align-items:center;gap:6px;
+  padding:4px 14px 4px 8px;border-radius:999px;
+  background:linear-gradient(145deg,#FFB8D8,#FF85A8);border:2px solid #FFF;
+  font-size:12px;font-weight:700;color:#FFF;box-shadow:0 3px 10px rgba(255,130,170,.25);
+}
+.name-plate .avatar{width:20px;height:20px;border-radius:50%;background:#FFF;display:flex;align-items:center;justify-content:center;font-size:12px}
+.vn-text{font-size:clamp(13px,3.3vw,15px);line-height:1.8;color:var(--text);margin-top:4px;min-height:2.8em}
+.vn-text .hl{color:#FF6B95;font-weight:700}
+.vn-text .big{display:block;font-size:1.25em;font-weight:900;color:#FF78A8;margin:4px 0}
+.vn-text .jp{display:block;font-size:.84em;color:var(--text2);margin-top:4px}
+.vn-cursor{display:inline-block;width:2px;height:1em;background:#FF85A8;margin-left:2px;animation:blink .5s infinite;vertical-align:text-bottom}
+@keyframes blink{50%{opacity:0}}
+.sticker{position:absolute;pointer-events:none;font-size:16px;opacity:.75;animation:stickerBob 3s ease-in-out infinite}
+.sticker.s1{top:-6px;right:16px}.sticker.s2{bottom:-4px;left:20px;font-size:14px;animation-delay:.8s}
+.sticker.s3{top:40%;right:-4px;font-size:14px;animation-delay:.4s}
+@keyframes stickerBob{50%{transform:translateY(-5px)}}
+
+/* ===== 果冻按钮 ===== */
+.actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+.jelly-btn{
+  position:relative;
+  padding:11px 28px;border:none;border-radius:999px;cursor:pointer;
+  font-family:'M PLUS Rounded 1c','Noto Sans SC',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;color:#FFF;
+  background:linear-gradient(180deg,#FFC8E0 0%,#FF85A8 100%);
+  border:2px solid rgba(255,255,255,.85);box-shadow:0 6px 20px rgba(255,130,170,.3),inset 0 2px 8px rgba(255,255,255,.45);
+  transition:transform .2s,box-shadow .2s;
+}
+.jelly-btn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(255,130,170,.4),inset 0 2px 8px rgba(255,255,255,.5)}
+.jelly-btn:active{transform:scale(.97)}
+
+/* ===== 音乐条 ===== */
+.music-capsule{
+  width:94%;max-width:520px;margin-top:12px;padding:10px 14px;border-radius:20px;
+  background:#FFF;border:2px solid #FFE8F2;box-shadow:0 4px 16px rgba(255,158,196,.1);
+  display:flex;align-items:center;gap:10px;
+}
+.music-capsule.playing{border-color:#FFC8E0;box-shadow:0 4px 20px rgba(255,158,196,.18)}
+.disc{width:38px;height:38px;border-radius:50%;background:conic-gradient(#FFB8D8,#E4C0F0,#B8E4F8,#FFB8D8);
+  display:flex;align-items:center;justify-content:center;animation:discSpin 5s linear infinite;animation-play-state:paused}
+.music-capsule.playing .disc{animation-play-state:running}
+@keyframes discSpin{to{transform:rotate(360deg)}}
+.disc-inner{width:26px;height:26px;border-radius:50%;background:#FFF;display:flex;align-items:center;justify-content:center;font-size:13px}
+.m-title{font-size:12px;font-weight:700;color:var(--text)}.m-artist{font-size:10px;color:var(--text2)}
+.m-btn{width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;background:#FFF5FA;color:var(--text2);font-size:12px;display:flex;align-items:center;justify-content:center}
+.m-btn.main{background:linear-gradient(145deg,#FFB8D8,#FF85A8);color:#FFF;width:36px;height:36px;font-size:14px;box-shadow:0 3px 10px rgba(255,130,170,.25)}
+.m-bar{flex:0 0 55px;height:4px;background:#FFE8F2;border-radius:2px;cursor:pointer;overflow:hidden}
+.m-fill{height:100%;background:linear-gradient(90deg,#FFB8D8,#E4C0F0);border-radius:2px}
+
+#heartCanvas{position:fixed;inset:0;z-index:25;pointer-events:none}
+#charFx{position:absolute;inset:0;pointer-events:none;z-index:5}
+
+/* ===== 开始 / 礼物 ===== */
+#startScreen{
+  position:fixed;inset:0;z-index:100;background:linear-gradient(180deg,#FFFAFD,#FFE8F4);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .7s,visibility .7s;
+}
+#startScreen.hide{opacity:0;visibility:hidden;pointer-events:none}
+.start-inner{text-align:center;animation:startFloat 3.5s ease-in-out infinite}
+@keyframes startFloat{50%{transform:translateY(-8px)}}
+.start-heart{font-size:52px;animation:heartThrob 1.2s infinite}
+@keyframes heartThrob{20%{transform:scale(1.12)}}
+.start-title{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(26px,6vw,36px);font-weight:900;color:#FF85A8;margin:16px 0 8px}
+.start-desc{font-size:14px;color:var(--text2);line-height:2}.start-desc em{color:#FF6B95;font-style:normal;font-weight:700}
+.start-btn{margin-top:24px}
+
+#giftLayer{position:fixed;inset:0;z-index:50;background:rgba(255,250,252,.96);display:none;align-items:center;justify-content:center}
+#giftLayer.show{display:flex}
+.gift-scene{text-align:center}
+.gift-box{font-size:72px;cursor:pointer;animation:giftWiggle 1.4s ease-in-out infinite;filter:drop-shadow(0 8px 24px rgba(255,158,196,.3))}
+@keyframes giftWiggle{50%{transform:rotate(4deg)}}
+.gift-msg{font-size:15px;color:var(--text);margin-top:18px;font-weight:700}
+.gift-sparkles{font-size:20px;color:var(--rose);margin-top:10px}
+
+.flash{position:fixed;inset:0;z-index:90;background:#FFF;pointer-events:none;opacity:0}
+.flash.on{animation:flashGo .4s}
+@keyframes flashGo{20%{opacity:.25}100%{opacity:0}}
+</style>
+</head>
+<body>
+
+<div class="layer-sky" id="layerSky"></div>
+<div class="layer-glow"></div>
+<div class="layer-far">
+  <div class="rainbow-arc a1"></div>
+  <div class="rainbow-arc a2"></div>
+  <div class="ribbon-rainbow r1"></div>
+  <div class="ribbon-rainbow r2"></div>
+  <div class="cake-castle">
+    <div class="castle-body">
+      <div class="castle-tier t1"></div>
+      <div class="castle-tier t2"></div>
+      <div class="castle-tier t3"></div>
+      <div class="castle-tier t4"></div>
+      <span class="castle-cherry c1">🍒</span>
+      <span class="castle-cherry c2">🍒</span>
+      <span class="castle-cherry c3">🍓</span>
+      <div class="castle-candle"></div>
+    </div>
+  </div>
+</div>
+<div class="layer-mid" id="layerMid"></div>
+<canvas id="starCanvas"></canvas>
+<div class="bubble-layer" id="bubbleLayer"></div>
+<div class="petal-layer" id="petalLayer"></div>
+<div class="pixel-sparkle"></div>
+<div class="fg-sweets" id="fgSweets"></div>
+<div class="sticker-field" id="stickerField"></div>
+<div class="deco-corner tl">🎀</div>
+<div class="deco-corner tr">✨</div>
+<div class="deco-corner bl">🌸</div>
+<div class="deco-corner br">🍬</div>
+<div class="depth-vignette"></div>
+<div class="flash" id="flash"></div>
+
+<div id="startScreen">
+  <div class="start-inner">
+    <div class="start-heart">💕</div>
+    <div class="start-title">康娜の告白</div>
+    <div class="start-desc">一封来自<span style="color:var(--lav)">可爱萝莉</span>的心意<br>专属于 <em>科伟哥哥</em> 一个人喔 ✦</div>
+    <div class="start-btn jelly-btn">♪ 点击开始 · 开启甜蜜冒险</div>
+  </div>
+</div>
+
+<div id="stage-wrap" class="stage-card">
+  <div class="title-cluster">
+    <div class="main-title">💕 For 科伟哥哥 💕</div>
+    <div class="jp-sub">カンナの想い · ずっと一緒</div>
+    <div class="heart-badge">♡ 康娜の想い ♡</div>
+  </div>
+
+  <div class="heart-chain" id="heartChain"></div>
+
+  <div class="char-frame">
+    <div class="char-inner">
+      <div class="glow-ring r1"></div>
+      <div class="glow-ring r2"></div>
+      <div class="expr-overlay blush-overlay" id="blushOL"></div>
+      <div class="expr-overlay love-overlay" id="loveOL"></div>
+      <div class="kanna-wrap" id="kannaWrap">
+        <img id="kanna" src="assets/kanna_ref.png" alt="康娜" draggable="false">
+      </div>
+      <canvas id="charFx"></canvas>
+      <div class="voice-panel" id="voicePanel">
+        <span class="v-icon">🔊</span>
+        <div class="voice-waves"><div class="v-wave"></div><div class="v-wave"></div><div class="v-wave"></div><div class="v-wave"></div><div class="v-wave"></div></div>
+        <span class="voice-text" id="voiceText">しゃべってる</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="vn-dialogue">
+    <div class="sticker s1">💖</div>
+    <div class="sticker s2">🦊</div>
+    <div class="sticker s3">⭐</div>
+    <div class="vn-box">
+      <div class="name-plate"><span class="avatar">🦊</span>カンナ · 康娜</div>
+      <div class="vn-text" id="vnText"></div>
+    </div>
+  </div>
+
+  <div class="actions" id="actions"></div>
+
+  <div class="music-capsule" id="musicCapsule">
+    <div class="disc"><div class="disc-inner">🎵</div></div>
+    <div class="m-info">
+      <div class="m-title">キミに100パーセント</div>
+      <div class="m-artist">きゃりーぱみゅぱみゅ ♡</div>
+    </div>
+    <div class="m-ctrl">
+      <button class="m-btn main" id="playBtn">▶</button>
+      <div class="m-bar" id="mBar"><div class="m-fill" id="mFill"></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="giftLayer">
+  <div class="gift-scene">
+    <div class="gift-box" id="giftBox">🎁</div>
+    <div class="gift-msg">科伟哥哥～康娜准备了特别的礼物喔！</div>
+    <div class="gift-sparkles">✨ 点击打开 ✨</div>
+  </div>
+</div>
+
+<canvas id="heartCanvas"></canvas>
+<audio id="bgm" loop preload="auto"></audio>
+<audio id="voiceAudio" preload="auto"></audio>
+
+<script>
+'use strict';
+
+const PHASES = [
+  {
+    mood:'m1', expr:'normal', anim:null, blush:false, love:false,
+    html:'あ… <span class="hl">科伟哥哥</span>！<br>你终于来了呀～康娜等你好久了！<span class="jp">ふわふわ…待ってたよ</span>',
+    btn:'戳戳康娜 👆', sfx:'boop',
+    voiceKey:'p0_main', tapVoiceKey:'p0_tap',
+    voiceLabel:'こんにちは、かずきおにいちゃん。'
+  },
+  {
+    mood:'m2', expr:'blush', anim:'shake', blush:true, love:false,
+    html:'もう！<span class="hl">科伟哥哥</span> 戳我干嘛啦！<br>尾巴都竖起来了…好害羞 💗<span class="jp">恥ずかしいよ〜</span>',
+    btn:'摸摸头 🖐️', sfx:'surprise',
+    voiceKey:'p1_main', tapVoiceKey:'p1_tap',
+    voiceLabel:'恥ずかしい、よ。'
+  },
+  {
+    mood:'m3', expr:'happy', anim:'happy', blush:true, love:false,
+    html:'えへへ…被 <span class="hl">科伟哥哥</span> 摸头<br>好舒服喔～康娜最喜欢这样了 🥰<span class="jp">もっとして〜</span>',
+    btn:'继续甜蜜冒险 ▶', sfx:'sparkle',
+    voiceKey:'p2_main', tapVoiceKey:'p2_tap',
+    voiceLabel:'えへへ、うれしいな。'
+  },
+  {
+    mood:'m4', expr:'excited', anim:'bounce', blush:false, love:false,
+    html:'对了！康娜给 <span class="hl">科伟哥哥</span> 准备了<br>特别的礼物喔～快打开看看！🎁<span class="jp">プレゼント、大事にしてね</span>',
+    btn:'打开礼物 🎁', sfx:'gift', action:'gift',
+    voiceKey:'p3_main', tapVoiceKey:'p3_tap',
+    voiceLabel:'プレゼント、あげる。'
+  },
+  {
+    mood:'m5', expr:'shy', anim:'happy', blush:true, love:false,
+    html:'里面是一封信…<br><span class="big">「科伟哥哥，你是康娜最重要的人」</span><span class="jp">ずっとそばにいてね…</span>',
+    btn:'康娜… 💕', sfx:'heart',
+    voiceKey:'p4_main', tapVoiceKey:'p4_tap',
+    voiceLabel:'だいじな、人。'
+  },
+  {
+    mood:'m6', expr:'love', anim:'love', blush:true, love:true,
+    html:'其实…康娜一直想说…<br><span class="big">だいすき！科伟哥哥！！</span>💕💕💕<span class="jp">大好き！世界一だいすき！</span>',
+    btn:'抱抱康娜 🤗', sfx:'confess',
+    voiceKey:'p5_main', tapVoiceKey:'p5_tap',
+    voiceLabel:'だいすき。世界一。'
+  },
+  {
+    mood:'m6', expr:'love', anim:'happy', blush:true, love:true,
+    html:'🤗 <span class="hl">科伟哥哥</span> 的怀抱好温暖…<br>康娜要一直、一直和你在一起！<span class="jp">ぎゅ〜っ、ずっと一緒だよ</span>',
+    btn:'再抱紧一点 🫂', sfx:'hug',
+    voiceKey:'p6_main', tapVoiceKey:'p6_tap',
+    voiceLabel:'ぎゅって、して。'
+  }
+];
+
+// ===== AUDIO =====
+const AudioEng = {
+  ctx: null,
+  init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); return this.ctx; },
+  tone(f, d, type='sine', v=.12, slide=0) {
+    const ac = this.init(); if (ac.state==='suspended') ac.resume();
+    const o=ac.createOscillator(), g=ac.createGain();
+    o.type=type; o.frequency.setValueAtTime(f,ac.currentTime);
+    if(slide) o.frequency.linearRampToValueAtTime(f+slide,ac.currentTime+d);
+    g.gain.setValueAtTime(v,ac.currentTime); g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+d);
+    o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime+d);
+  },
+  sfx(n) {
+    const m = {
+      boop:()=>{this.tone(523,.08,'square',.08);setTimeout(()=>this.tone(659,.1,'square',.06),60)},
+      surprise:()=>{this.tone(880,.06,'square',.1);this.tone(1047,.08,'square',.08);setTimeout(()=>this.tone(784,.12,'triangle',.06),80)},
+      sparkle:()=>[523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>this.tone(f,.12,'sine',.06),i*50)),
+      gift:()=>{this.tone(392,.15,'triangle',.1);setTimeout(()=>this.tone(523,.15,'triangle',.1),120);setTimeout(()=>this.tone(659,.2,'triangle',.12),240)},
+      heart:()=>[440,554,659,880].forEach((f,i)=>setTimeout(()=>this.tone(f,.2,'sine',.08),i*100)),
+      confess:()=>{[523,587,659,784,880,1047].forEach((f,i)=>setTimeout(()=>this.tone(f,.25,'square',.07),i*120));setTimeout(()=>[1047,880,1047,1319].forEach((f,i)=>setTimeout(()=>this.tone(f,.3,'sine',.1),i*100)),720)},
+      hug:()=>{this.tone(330,.3,'sine',.1);setTimeout(()=>this.tone(440,.4,'sine',.08),200)},
+      start:()=>[392,523,659,784].forEach((f,i)=>setTimeout(()=>this.tone(f,.2,'triangle',.08),i*80)),
+      click:()=>this.tone(800,.04,'square',.04)
+    };
+    (m[n]||m.click)();
+  }
+};
+
+const bgm = document.getElementById('bgm');
+let bgmOn = false, bgmReady = false;
+const BGM_SRC = ['assets/bgm.mp3','assets/kimi_ni_100.mp3','./assets/bgm.mp3'];
+function initBGM() {
+  if (bgmReady) return; bgmReady = true;
+  let i = 0;
+  const next = () => { if (i < BGM_SRC.length) { bgm.src = BGM_SRC[i++]; bgm.load(); } };
+  bgm.onerror = next; next();
+}
+function startBGM() {
+  initBGM(); bgm.volume = 0;
+  bgm.play().then(() => {
+    bgmOn = true;
+    document.getElementById('playBtn').textContent = '⏸';
+    document.getElementById('musicCapsule').classList.add('playing');
+    const f = setInterval(() => { bgm.volume = Math.min(.5, bgm.volume + .02); if (bgm.volume >= .5) clearInterval(f); }, 80);
+  }).catch(()=>{});
+}
+function toggleBGM() {
+  initBGM();
+  if (bgmOn) { bgm.pause(); bgmOn = false; document.getElementById('playBtn').textContent = '▶'; document.getElementById('musicCapsule').classList.remove('playing'); }
+  else { bgm.play().then(() => { bgmOn = true; document.getElementById('playBtn').textContent = '⏸'; document.getElementById('musicCapsule').classList.add('playing'); }); }
+}
+document.getElementById('playBtn').onclick = toggleBGM;
+document.getElementById('mBar').onclick = e => { if (!bgm.duration) return; const r = e.currentTarget.getBoundingClientRect(); bgm.currentTime = ((e.clientX - r.left) / r.width) * bgm.duration; };
+setInterval(() => { if (bgm.duration) document.getElementById('mFill').style.width = (bgm.currentTime / bgm.duration * 100) + '%'; }, 200);
+
+// ===== JAPANESE VOICE (pre-generated Neural TTS MP3) =====
+const VOICE_DIR = 'assets/voices/';
+const VOICE_VER = '?v=16';
+const voiceAudio = document.getElementById('voiceAudio');
+const voicePanel = document.getElementById('voicePanel');
+const voiceText = document.getElementById('voiceText');
+let voiceQueue = [], voicePlaying = false;
+
+// Preload all voice clips
+['p0_main','p0_tap','p1_main','p1_tap','p2_main','p2_tap','p3_main','p3_tap',
+ 'p4_main','p4_tap','p5_main','p5_tap','p6_main','p6_tap','extra_promise','extra_cheat'
+].forEach(k => { const a = new Audio(VOICE_DIR + k + '.mp3' + VOICE_VER); a.preload = 'auto'; });
+
+function duckBGM(duck) {
+  if (!bgmOn) return;
+  const target = duck ? 0.18 : 0.5;
+  const step = duck ? -0.05 : 0.05;
+  const iv = setInterval(() => {
+    if (duck ? bgm.volume > target : bgm.volume < target) bgm.volume = Math.max(0, Math.min(1, bgm.volume + step));
+    else { bgm.volume = target; clearInterval(iv); }
+  }, 40);
+}
+
+function playVoiceKey(key, label, priority) {
+  if (!key) return;
+  if (priority) { voiceQueue = []; voiceAudio.pause(); voicePlaying = false; }
+  voiceQueue.push({ key, label: label || key });
+  if (!voicePlaying) drainVoiceQueue();
+}
+
+function drainVoiceQueue() {
+  if (!voiceQueue.length) {
+    voicePlaying = false;
+    voicePanel.classList.remove('on');
+    duckBGM(false);
+    return;
+  }
+  voicePlaying = true;
+  const { key, label } = voiceQueue.shift();
+  const url = VOICE_DIR + key + '.mp3' + VOICE_VER;
+  voiceAudio.pause();
+  voiceAudio.currentTime = 0;
+  voiceAudio.onended = null;
+  voiceAudio.onerror = null;
+  voiceAudio.oncanplaythrough = null;
+  voiceAudio.src = url;
+  voiceAudio.volume = 1.0;
+  voiceText.textContent = label;
+  voicePanel.classList.add('on');
+  duckBGM(true);
+  voiceAudio.onended = () => setTimeout(drainVoiceQueue, 180);
+  voiceAudio.onerror = () => {
+    console.warn('Voice load failed:', url);
+    voicePlaying = false;
+    voicePanel.classList.remove('on');
+    duckBGM(false);
+    drainVoiceQueue();
+  };
+  const playNow = () => {
+    voiceAudio.play().catch(e => {
+      console.warn('Voice play blocked:', e);
+      voicePanel.classList.remove('on');
+      duckBGM(false);
+      voicePlaying = false;
+    });
+  };
+  voiceAudio.oncanplaythrough = playNow;
+  voiceAudio.load();
+  if (voiceAudio.readyState >= 3) playNow();
+}
+
+function speakPhase(p, tap) {
+  const key = tap ? p.tapVoiceKey : p.voiceKey;
+  playVoiceKey(key, p.voiceLabel, true);
+}
+
+// ===== TYPEWRITER =====
+let typeIv = null;
+function typeHTML(html) {
+  const el = document.getElementById('vnText');
+  if (typeIv) clearInterval(typeIv);
+  const tmp = document.createElement('div'); tmp.innerHTML = html;
+  const plain = tmp.textContent;
+  let i = 0; el.innerHTML = '';
+  typeIv = setInterval(() => {
+    if (i >= plain.length) { clearInterval(typeIv); el.innerHTML = html; return; }
+    i += 2;
+    el.textContent = plain.slice(0, i);
+    el.innerHTML = el.textContent + '<span class="vn-cursor"></span>';
+  }, 32);
+}
+
+// ===== HEART PARTICLES =====
+const hC = document.getElementById('heartCanvas');
+const hCtx = hC.getContext('2d');
+let hearts = [], rainRate = 0;
+
+function resizeCanvases() {
+  hC.width = window.innerWidth; hC.height = window.innerHeight;
+  const sc = document.getElementById('starCanvas');
+  sc.width = window.innerWidth; sc.height = window.innerHeight;
+  const cf = document.getElementById('charFx');
+  const r = cf.parentElement.getBoundingClientRect();
+  cf.width = r.width; cf.height = r.height;
+}
+window.addEventListener('resize', resizeCanvases);
+resizeCanvases();
+
+function burst(x, y, n, emojis) {
+  if (hearts.length > PERF.maxHearts) hearts = hearts.slice(-30);
+  const cap = Math.min(n, PERF.maxHearts - hearts.length);
+  const e = emojis || ['💕','💗','✨','🌸','⭐','♥'];
+  for (let i = 0; i < cap; i++) hearts.push({
+    x: x ?? hC.width/2, y: y ?? hC.height*.35,
+    vx: (Math.random()-.5)*4, vy: -1.5-Math.random()*3.5,
+    life: 1, dec: .006+Math.random()*.01, sz: 10+Math.random()*18,
+    rot: Math.random()*Math.PI*2, rs: (Math.random()-.5)*.07, em: e[i%e.length]
+  });
+  animHearts();
+}
+function animHearts() {
+  hCtx.clearRect(0,0,hC.width,hC.height);
+  hearts = hearts.filter(h=>h.life>0);
+  for (const h of hearts) {
+    h.x+=h.vx; h.y+=h.vy; h.vy*=.985; h.life-=h.dec; h.rot+=h.rs;
+    hCtx.save(); hCtx.translate(h.x,h.y); hCtx.rotate(h.rot);
+    hCtx.globalAlpha = h.life*.9; hCtx.font = `${h.sz}px sans-serif`;
+    hCtx.textAlign='center'; hCtx.textBaseline='middle'; hCtx.fillText(h.em,0,0);
+    hCtx.restore();
+  }
+  if (hearts.length) requestAnimationFrame(animHearts);
+}
+function heartRain(rate) {
+  rainRate = Math.min(rate, 4);
+  (function rain() {
+    if (rainRate <= 0 || hearts.length > PERF.maxHearts) return;
+    burst(Math.random() * hC.width, hC.height + 10, 1);
+    setTimeout(rain, 600 / rainRate);
+  })();
+}
+
+// ===== 多层甜美背景（CSS 为主，画布限帧）=====
+const PERF = { fps: 24, maxHearts: 50, reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches };
+
+(function starCanvas() {
+  if (PERF.reduced) return;
+  const c = document.getElementById('starCanvas');
+  const ctx = c.getContext('2d', { alpha: true });
+  let stars = [], last = 0;
+  const N = 45;
+  function init() {
+    stars = Array.from({ length: N }, () => ({
+      x: Math.random() * c.width, y: Math.random() * c.height,
+      s: .8 + Math.random() * 2, ph: Math.random() * 6.28, sp: .008 + Math.random() * .016,
+      c: `hsla(${330 + Math.random() * 20},90%,80%,${.45 + Math.random() * .4})`
+    }));
+  }
+  init();
+  function draw(ts) {
+    requestAnimationFrame(draw);
+    if (ts - last < 1000 / PERF.fps) return;
+    last = ts;
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      s.ph += s.sp;
+      ctx.globalAlpha = .45 + Math.sin(s.ph) * .35;
+      ctx.fillStyle = s.c;
+      ctx.fillRect(s.x | 0, s.y | 0, s.s * 2, s.s * 2);
+    }
+    ctx.globalAlpha = 1;
+  }
+  draw(0);
+  window.addEventListener('resize', () => { resizeCanvases(); init(); });
+})();
+
+(function midLayer() {
+  const layer = document.getElementById('layerMid');
+  for (let i = 0; i < 8; i++) {
+    const cl = document.createElement('div'); cl.className = 'cotton-cloud';
+    const w = 80 + Math.random() * 100, h = 40 + Math.random() * 45;
+    cl.style.cssText = `width:${w}px;height:${h}px;left:${5 + Math.random() * 80}%;top:${6 + Math.random() * 48}%;animation-delay:${i * .4}s;animation-duration:${8 + i}s`;
+    layer.appendChild(cl);
+  }
+  [[6, 22], [88, 30], [12, 58], [78, 62], [45, 12]].forEach(([l, t], i) => {
+    const ps = document.createElement('div'); ps.className = 'pearl-strand';
+    ps.style.cssText = `left:${l}%;top:${t}%;animation-delay:${i * .3}s`;
+    for (let j = 0; j < 7; j++) { const p = document.createElement('span'); p.className = 'pearl'; ps.appendChild(p); }
+    layer.appendChild(ps);
+  });
+  const cards = ['♡', '✨', '🌸', '⭐'];
+  [[72, 18], [8, 38], [85, 52], [18, 72]].forEach(([l, t], i) => {
+    const gc = document.createElement('div');
+    gc.className = 'deco-float';
+    gc.textContent = cards[i];
+    gc.style.cssText = `left:${l}%;top:${t}%;font-size:${18 + i * 2}px;animation-delay:${i * .6}s;opacity:.45`;
+    layer.appendChild(gc);
+  });
+})();
+
+(function petals() {
+  const layer = document.getElementById('petalLayer');
+  const chars = ['🌸', '♡', '✨', '⭐', '💮', '🩷'];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div'); p.className = 'petal';
+    p.textContent = chars[i % chars.length];
+    p.style.cssText = `left:${Math.random() * 100}%;font-size:${12 + Math.random() * 14}px;animation-duration:${8 + Math.random() * 10}s;animation-delay:${Math.random() * 14}s`;
+    layer.appendChild(p);
+  }
+})();
+
+(function bubbles() {
+  const layer = document.getElementById('bubbleLayer');
+  for (let i = 0; i < 16; i++) {
+    const b = document.createElement('div'); b.className = 'heart-bubble';
+    b.textContent = ['♡', '💕', '💗', '✧', '🫧'][i % 5];
+    const sz = 18 + Math.random() * 20;
+    b.style.cssText = `left:${Math.random() * 100}%;width:${sz}px;height:${sz}px;background:rgba(255,255,255,${.35 + Math.random() * .25});color:rgba(255,100,150,.85);animation-duration:${11 + Math.random() * 9}s;animation-delay:${Math.random() * 12}s;font-size:${sz * .48}px`;
+    layer.appendChild(b);
+  }
+})();
+
+(function fgSweets() {
+  const layer = document.getElementById('fgSweets');
+  const spots = [[4,68,0],[10,52,1],[92,58,2],[88,42,0],[5,35,2],[94,72,1],[16,78,0],[82,82,2],[22,88,1],[78,28,0]];
+  spots.forEach(([l, t, type], i) => {
+    const d = document.createElement('div'); d.className = 'sweet-item';
+    const sc = .85 + Math.random() * .35;
+    d.style.cssText = `left:${l}%;top:${t}%;animation-delay:${i * .35}s;transform:scale(${sc})`;
+    if (type === 0) d.innerHTML = '<div class="macaron"><div class="fill"></div></div>';
+    else if (type === 1) d.innerHTML = '<div class="strawberry"></div>';
+    else d.innerHTML = '<div class="candy-crystal"></div>';
+    layer.appendChild(d);
+  });
+})();
+
+(function stickers() {
+  const layer = document.getElementById('stickerField');
+  const em = ['⭐', '💖', '🎀', '✦', '🍓', '🧁', '💫', '🌷'];
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement('div'); s.className = 'sticker-deco';
+    s.textContent = em[i % em.length];
+    s.style.cssText = `left:${5 + Math.random() * 88}%;top:${8 + Math.random() * 82}%;font-size:${14 + Math.random() * 12}px;animation-duration:${10 + Math.random() * 8}s;animation-delay:${Math.random() * 5}s`;
+    layer.appendChild(s);
+  }
+})();
+
+document.body.className = 'mood-m1';
+
+// ===== GAME STATE =====
+let phase = 0, hugN = 0, started = false;
+const kanna = document.getElementById('kanna');
+const kannaWrap = document.getElementById('kannaWrap');
+const blushOL = document.getElementById('blushOL');
+const loveOL = document.getElementById('loveOL');
+// Build heart chain
+const chain = document.getElementById('heartChain');
+PHASES.forEach((_, i) => {
+  if (i > 0) { const l = document.createElement('div'); l.className = 'h-line'; chain.appendChild(l); }
+  const n = document.createElement('div'); n.className = 'h-node'; n.textContent = '♡'; chain.appendChild(n);
+});
+
+function updateChain() {
+  const nodes = chain.querySelectorAll('.h-node');
+  const lines = chain.querySelectorAll('.h-line');
+  nodes.forEach((n, i) => { n.className = 'h-node'; if (i < phase) n.classList.add('done'); if (i === phase) n.classList.add('active'); });
+  lines.forEach((l, i) => { l.className = 'h-line'; if (i < phase) l.classList.add('done'); });
+}
+
+function setMood(p) {
+  document.body.className = 'mood-' + (p.mood || 'm1');
+  blushOL.classList.toggle('on', p.blush);
+  loveOL.classList.toggle('on', p.love);
+}
+
+function flash() {
+  const f = document.getElementById('flash'); f.classList.remove('on'); void f.offsetWidth; f.classList.add('on');
+}
+
+function playAnim(name) {
+  if (!name) return;
+  kannaWrap.classList.remove('bounce','shake','happy','love');
+  void kannaWrap.offsetWidth;
+  kannaWrap.classList.add(name);
+  if (name !== 'love') setTimeout(() => kannaWrap.classList.remove(name), 800);
+}
+
+function applyPhase() {
+  const p = PHASES[phase];
+  setMood(p);
+  typeHTML(p.html);
+  updateChain();
+  const act = document.getElementById('actions');
+  act.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'jelly-btn';
+  btn.textContent = p.btn;
+  btn.onclick = advance;
+  act.appendChild(btn);
+}
+
+function advance() {
+  AudioEng.sfx('click');
+  const p = PHASES[phase];
+  if (p.action === 'gift') {
+    document.getElementById('giftLayer').classList.add('show');
+    AudioEng.sfx('gift');
+    speakPhase(p, false);
+    return;
+  }
+  if (phase < PHASES.length - 1) {
+    phase++;
+    goPhase(PHASES[phase], true);
+  } else {
+    hugN++;
+    AudioEng.sfx('hug');
+    playAnim('happy');
+    burst(hC.width/2, hC.height*.32, 25+hugN*8);
+    heartRain(5+hugN);
+    speakPhase(PHASES[phase], false);
+    if (hugN === 1) typeHTML('🤗 再紧一点…康娜好幸福～<span class="jp">もっとぎゅって</span>');
+    else if (hugN === 3) {
+      typeHTML('<span class="big">嗯！约好了喔！大好き！ずっと一緒！💕🌸</span><span class="jp">約束だよ、離れないで</span>');
+      playVoiceKey('extra_promise', '約束だよ！', true);
+      burst(hC.width/2, hC.height*.32, 60);
+    } else {
+      const msgs = [
+        '💕 科伟哥哥的温度…康娜永远记住',
+        '🌸 永远不要松开好不好…',
+        '🦊 康娜是科伟哥哥的小尾巴～'
+      ];
+      typeHTML(msgs[hugN % msgs.length]);
+    }
+  }
+}
+
+function goPhase(p, withVoice) {
+  AudioEng.sfx(p.sfx);
+  flash();
+  if (phase >= 2) burst(hC.width/2, hC.height*.32, 10+phase*4);
+  if (phase >= 4) heartRain(phase === 5 ? 5 : 2.5);
+  applyPhase();
+  playAnim(p.anim);
+  if (withVoice && p.voiceKey) setTimeout(() => speakPhase(p, false), 300);
+}
+
+// Kanna click → voice + reaction
+kannaWrap.addEventListener('click', () => {
+  if (!started) return;
+  AudioEng.sfx('boop');
+  playAnim('bounce');
+  burst(hC.width/2, hC.height*.32, 8);
+  const p = PHASES[phase];
+  speakPhase(p, true);
+});
+
+// Gift
+document.getElementById('giftBox').addEventListener('click', () => {
+  AudioEng.sfx('heart');
+  burst(hC.width/2, hC.height/2, 35);
+  document.getElementById('giftLayer').classList.remove('show');
+  setTimeout(() => {
+    phase++;
+    goPhase(PHASES[phase], true);
+  }, 500);
+});
+
+// Start (unlock audio on first click)
+document.getElementById('startScreen').addEventListener('click', () => {
+  voiceAudio.src = VOICE_DIR + 'p0_main.mp3' + VOICE_VER;
+  voiceAudio.load();
+  started = true;
+  document.getElementById('startScreen').classList.add('hide');
+  AudioEng.init();
+  AudioEng.sfx('start');
+  startBGM();
+  applyPhase();
+  setTimeout(() => speakPhase(PHASES[0], false), 400);
+  burst(hC.width/2, hC.height*.35, 20);
+  heartRain(1.5);
+});
+
+// Easter egg
+let cheat = '';
+document.addEventListener('keydown', e => {
+  cheat += e.key.toLowerCase();
+  if (cheat.length > 12) cheat = cheat.slice(-12);
+  if (cheat.includes('keweilove')) {
+    phase = PHASES.length - 1;
+    applyPhase();
+    burst(hC.width/2, hC.height*.3, 40);
+    heartRain(3);
+    typeHTML('<span class="big">💕 科伟哥哥大好き！！！💕</span><span class="jp">かずきおにいちゃん、世界一！</span>');
+    playVoiceKey('extra_cheat', '世界一だいすき！', true);
+    AudioEng.sfx('confess');
+    setMood(PHASES[phase]);
+  }
+});
+
+console.log('💕 康娜 → 科伟哥哥 | keweilove = 隐藏惊喜');
+</script>
+</body>
+</html>
